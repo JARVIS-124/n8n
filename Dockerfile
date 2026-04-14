@@ -2,10 +2,9 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y ffmpeg && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Use Alpine package manager (apk, not apt-get)
+RUN apk update && \
+    apk add --no-cache ffmpeg
 
 ENV N8N_ENABLE_EXECUTE_COMMAND=true
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
